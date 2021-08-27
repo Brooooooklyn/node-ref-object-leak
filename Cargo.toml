@@ -1,0 +1,19 @@
+[package]
+authors = ["LongYinan <lynweklm@gmail.com>"]
+edition = "2018"
+name = "napi-object-ref-leak"
+version = "0.1.0"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = {version = "1", features = ["napi5"]}
+napi-derive = "1"
+snap = "1"
+
+[build-dependencies]
+napi-build = "1"
+
+[profile.release]
+lto = true
