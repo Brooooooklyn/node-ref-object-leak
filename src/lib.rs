@@ -9,8 +9,8 @@ fn init(mut exports: napi::JsObject) -> napi::Result<()> {
 
 #[js_function(1)]
 fn ref_buffer(ctx: napi::CallContext) -> napi::Result<napi::JsNumber> {
-    let buffer = ctx.get::<napi::JsBuffer>(0)?;
-    let ref_buffer = buffer.into_ref()?;
+    let buffer = ctx.get::<napi::JsObject>(0)?;
+    let ref_buffer = ctx.env.create_reference(buffer)?;
     let ref_count = ref_buffer.unref(ctx.env.clone())?;
     ctx.env.create_uint32(ref_count)
 }

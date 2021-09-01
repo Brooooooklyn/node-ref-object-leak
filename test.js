@@ -8,7 +8,8 @@ const BigBuffer = readFileSync('yarn.lock')
 const initial = process.memoryUsage()
 
 async function main() {
-  for (const [i] of Array.from({ length: 10000000 }).entries()) {
+  let i = 0
+  while (true) {
     let refCount = refBuffer(BigBuffer)
     if (refCount) {
       throw new Error(`refCount should be 0, but got ${refCount}`)
@@ -20,6 +21,7 @@ async function main() {
       }
       displayMemoryUsageFromNode(initial)
     }
+    i++
   }
 }
 
